@@ -68,7 +68,7 @@ const Login = () => {
 
     try {
       console.log(API_URL)
-      const res = await fetch(`${API_URL}/user/auth/institucion/`, {
+      const res = await fetch(`${API_URL}api/login/institucion/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -79,7 +79,7 @@ const Login = () => {
 
       const data = await res.json();
 
-      if (!res.ok || !data.access_token) {
+      if (!res.ok || !data.token) {
         setError("No se pudo cargar el perfil del colegio.");
         return;
       }
