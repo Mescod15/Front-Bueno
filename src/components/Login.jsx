@@ -24,30 +24,43 @@ const Login = () => {
     setError(null);
 
     try {    
-      const res = await fetch(`${API_URL}api/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      console.log("hola")
-      const data = await res.json();
-      console.log(data)
+    console.log("hola");
+    const res = await fetch(`${API_URL}api/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
 
-      if (!res.ok || !Array.isArray(data)) {
-        setError("Usuario o contraseña incorrecta.");
-        return;
-      }
+    // Primero lee la respuesta como texto para ver qué devuelve el servidor
+    const text = await res.text();
+    console.log("Respuesta como texto:", text);
 
-      if (data.length === 0) {
-        setError("No hay colegios asociados.");
-        return;
-      }
+    // Luego intenta parsear el texto a JSON
+    const data = JSON.parse(text);
+    console.log("Datos parseados:", data);
 
-      // Mostrar colegios disponibles
-      setInstitutions(data);
-    } catch (err) {
-      setError("Error al intentar iniciar sesión.");
+    if (!res.ok) {
+      setError("Usuario o contraseña incorrecta.");
+      return;
     }
+
+    if (!Array.isArray(data)) {
+      setError("Respuesta inesperada del servidor.");
+      return;
+    }
+
+    if (data.length === 0) {
+      setError("No hay colegios asociados.");
+      return;
+    }
+
+    // Mostrar colegios disponibles
+    setInstitutions(data);
+
+  } catch (err) {
+    console.error("Error al intentar iniciar sesión:", err);
+    setError("Error al intentar iniciar sesión.");
+  }
   };
 
   const handleSeleccionarInstitucion = async () => {
