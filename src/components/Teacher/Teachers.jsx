@@ -27,7 +27,7 @@ const Teachers = () => {
 
   // Hook personalizado con paginación
   const { data: teachers, totalPages, loading, error } = usePaginatedFetch({
-    url: `${API_URL}/profesores`,
+    url: `${API_URL}api/teacher`,
     token,
     searchTerm,
     page,
@@ -39,7 +39,7 @@ const Teachers = () => {
     if (!confirm) return;
 
     try {
-      await fetch(`${API_URL}/profesores/${id}`, {
+      await fetch(`${API_URL}api/teacher/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -124,8 +124,9 @@ const Teachers = () => {
         <table className="min-w-full border text-left text-sm border-gray-300">
           <thead className="bg-blue-100 text-gray-700">
             <tr>
-              <th className="px-4 py-2 border border-gray-300 w-2/12">Cédula</th>
-              <th className="px-4 py-2 border border-gray-300 w-6/12">Nombre</th>
+              <th className="px-4 py-2 border border-gray-300 w-2/12">Id</th>
+               <th className="px-4 py-2 border border-gray-300 w-4/12">Correo</th>
+              <th className="px-4 py-2 border border-gray-300 w-4/12">Nombre</th>
               <th className="px-4 py-2 border border-gray-300 w-2/12 text-center">Acciones</th>
             </tr>
           </thead>
@@ -137,10 +138,13 @@ const Teachers = () => {
                   className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}
                 >
                   <td className="px-4 py-2 border border-gray-300 text-gray-600">
-                    {teacher.doc}
+                    {teacher.id}
                   </td>
                   <td className="px-4 py-2 border border-gray-300 font-medium text-gray-800">
-                    {teacher.nom} {teacher.ape}
+                    {teacher.email} 
+                  </td>
+                  <td className="px-4 py-2 border border-gray-300 font-medium text-gray-800">
+                    {teacher.name} 
                   </td>
                   <td className="px-4 py-2 border border-gray-300 space-x-2 text-center">
                     <button

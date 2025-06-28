@@ -13,14 +13,14 @@ export const AuthProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("colegio"))
   );
 
-  const login = (perfil, jwt, institution, pageSize, rawPassword = null) => {
+  const login = (perfil, jwt) => {
+    console.log(jwt)
     localStorage.setItem("access_token", jwt);
     localStorage.setItem("perfil", JSON.stringify(perfil));
-    localStorage.setItem("colegio", JSON.stringify(institution));
+  
     setUser(perfil);
     setToken(jwt);
-    setInstitution(institution);
-    setPassword(rawPassword); // solo en memoria
+  
   };
   
   const logout = () => {

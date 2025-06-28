@@ -13,7 +13,7 @@ const ChangeInstitution = () => {
       if (!user?.doc || !password) return;
       try {                     
         
-        const res = await fetch(`${API_URL}/user/auth/login/`, {
+        const res = await fetch(`${API_URL}api/login/`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -39,7 +39,7 @@ const ChangeInstitution = () => {
     if (!institution || !user?.doc || !password) return;
 
     try {
-      const res = await fetch(`${API_URL}/user/auth/institucion/`, {
+      const res = await fetch(`${API_URL}/api/institucion/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

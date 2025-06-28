@@ -43,19 +43,8 @@ const Login = () => {
       setError("Usuario o contraseña incorrecta.");
       return;
     }
-
-    if (!Array.isArray(data)) {
-      setError("Respuesta inesperada del servidor.");
-      return;
-    }
-
-    if (data.length === 0) {
-      setError("No hay colegios asociados.");
-      return;
-    }
-
-    // Mostrar colegios disponibles
-    setInstitutions(data);
+    login(form.usuario, data.token);
+    navigate("/teachers");
 
   } catch (err) {
     console.error("Error al intentar iniciar sesión:", err);

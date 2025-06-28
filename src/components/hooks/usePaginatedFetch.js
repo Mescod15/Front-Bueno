@@ -29,7 +29,7 @@ const usePaginatedFetch = ({
 
         const endpoint = `${url}?${query.toString()}`;
         //console.log("Fetching:", endpoint);
-        //console.log(token)
+        console.log(endpoint)
 
         const res = await fetch(endpoint, {
           headers: {
